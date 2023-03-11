@@ -43,11 +43,12 @@ export function Home() {
   useEffect(() => {
     if (!user?._id) navigate("/login");
     getUserAccount();
+    getAccounts();
   }, []);
 
-  useEffect(() => {
-    getAccounts();
-  }, [account]);
+  // useEffect(() => {
+
+  // }, [account]);
 
   const generate = async () => {
     try {
