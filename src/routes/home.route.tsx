@@ -1,4 +1,4 @@
-import { Key, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import {
@@ -34,7 +34,9 @@ export function Home() {
 
   const getAccounts = async () => {
     const res = await getAllAccounts();
-    const filteredAccounts = res.filter((r: any) => r.profile._id != user?._id);
+    const filteredAccounts = res.filter(
+      (r: any) => r.profile._id !== user?._id
+    );
 
     setAllAccounts(filteredAccounts);
   };
