@@ -5,7 +5,7 @@ import {
   EyeSlashIcon,
   InformationCircleIcon,
 } from "../components/icons.component";
-import { validEmail, validPassword } from "../lib";
+import { validEmail } from "../lib";
 import { login } from "../api/user";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
@@ -19,7 +19,6 @@ export function Login() {
     password: "",
   });
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
