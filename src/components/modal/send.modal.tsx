@@ -20,13 +20,13 @@ function SendModal({
     e.preventDefault();
 
     try {
-      const res = await sendFunds({
+      await sendFunds({
         amount,
         receiver: paymentId,
         sender: myAccount,
       });
 
-      if (res.status === 201) setModal(null);
+      setModal(null);
     } catch (error: any) {
       alert(error?.response?.data.message);
     }

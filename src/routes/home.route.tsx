@@ -19,8 +19,6 @@ export function Home() {
   const [paymentId, setPaymentId] = useState("");
   const [account, setAccount] = useState("");
   const [allAccounts, setAllAccounts] = useState<IAccount[]>([]);
-  const [inflow, setInflow] = useState([]);
-  const [outflow, setOutflow] = useState([]);
   const [accountProfile, setAccountProfile] = useState<IAccount | any>({});
   const [userAccount, setUserAccount] = useState<IAccount[]>([]);
   const { setModal, currentModal } = useStore((state: any) => state);
@@ -31,7 +29,7 @@ export function Home() {
   const getAccounts = async () => {
     const res = await getAllAccounts();
     const filteredAccounts = res.filter((r) => r.profile._id !== user?._id);
-
+      
     setAllAccounts(filteredAccounts);
   };
 
@@ -45,10 +43,6 @@ export function Home() {
     getUserAccount();
     getAccounts();
   }, []);
-
-  // useEffect(() => {
-
-  // }, [account]);
 
   const generate = async () => {
     try {
@@ -84,12 +78,11 @@ export function Home() {
 
   const received = async () => {
     try {
-      const res = await getReceivedTransaction(paymentId);
+      const res = await getReceivedTransaction(account);
+      console.log("send", res);
 
       if (res) {
-        setInflow(res);
-
-        setModal(<ReceiveModal transactions={inflow} />);
+        setModal(<ReceiveModal transactions={res} />);
       }
     } catch (error: any) {
       alert(error?.response?.data.message);
@@ -98,12 +91,10 @@ export function Home() {
 
   const sent = async () => {
     try {
-      const res = await getSentTransaction(paymentId);
+      const res = await getSentTransaction(account);
 
       if (res) {
-        setOutflow(res);
-
-        setModal(<SentModal transactions={outflow} />);
+        setModal(<SentModal transactions={res} />);
       }
     } catch (error: any) {
       alert(error?.response?.data.message);

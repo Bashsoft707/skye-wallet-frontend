@@ -18,9 +18,14 @@ function ReceiveModal({ transactions }: { transactions: ITransaction[] }) {
           </span>
         </div>
         <ul>
-          {transactions.map((transaction) => (
-            <li key={transaction._id}>{transaction.receiver}</li>
-          ))}
+          <ul>
+            {transactions.map((transaction, idx) => (
+              <li className="text-black" key={transaction._id}>
+                {idx + 1}&nbsp;-&nbsp;{transaction.sender}: &#8358;{" "}
+                {transaction.amount}
+              </li>
+            ))}
+          </ul>
         </ul>
       </div>
     </>
