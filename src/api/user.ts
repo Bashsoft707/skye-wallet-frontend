@@ -12,14 +12,3 @@ export const login = async (payload: any) => {
 
   return { success: true, ...res.data };
 };
-
-export const getMe = async () => {
-  const token = window.localStorage.getItem("token");
-  const res = await axios.get(`${baseUrl}/user/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  return res.data;
-};

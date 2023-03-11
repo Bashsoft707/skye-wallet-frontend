@@ -8,7 +8,6 @@ import {
   userAccounts,
 } from "../api/account";
 import { getReceivedTransaction, getSentTransaction } from "../api/transaction";
-import { getMe } from "../api/user";
 import ReceiveModal from "../components/modal/receive.modal";
 import SendModal from "../components/modal/send.modal";
 import SentModal from "../components/modal/sent.modal";
@@ -23,14 +22,10 @@ export function Home() {
   const [outflow, setOutflow] = useState([]);
   const [accountProfile, setAccountProfile] = useState<any>({});
   const [userAccount, setUserAccount] = useState<any>([]);
-  const { user, setModal, setUser } = useStore((state: any) => state);
-  const currentModal = useStore((state: any) => state.currentModal);
+  const { setModal, setUser, currentModal } = useStore((state: any) => state);
   const navigate = useNavigate();
 
-  const getUser = async () => {
-    const res = await getMe();
-    setUser(res);
-  };
+  const user = JSON.parse(window.localStorage.getItem("user") as string);
 
   const getAccounts = async () => {
     const res = await getAllAccounts();
@@ -47,11 +42,7 @@ export function Home() {
   };
 
   useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-    
-    getUser();
+    if (!user?._id) navigate("/login");
     getUserAccount();
   }, []);
 

@@ -9,11 +9,9 @@ import { validEmail } from "../lib";
 import { login } from "../api/user";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import useStore from "../store";
 
 export function Login() {
   const navigate = useNavigate();
-  const { setUser } = useStore((state: any) => state);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -38,8 +36,9 @@ export function Login() {
     try {
       const result = await login(credentials);
 
-      setUser(result.user);
-      window.localStorage.setItem("token", result?.token);
+      window.localStorage.setItem("user", JSON.stringify(result.user));
+      window.localStorage.setItem("token", result.token);
+
       if (result?.user) return navigate("/");
     } catch (error: any) {
       alert(error?.response?.data.message);
