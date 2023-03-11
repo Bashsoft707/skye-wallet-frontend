@@ -47,6 +47,10 @@ export function Home() {
   };
 
   useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+    
     getUser();
     getUserAccount();
   }, []);
