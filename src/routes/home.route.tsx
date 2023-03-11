@@ -13,25 +13,24 @@ import SendModal from "../components/modal/send.modal";
 import SentModal from "../components/modal/sent.modal";
 import ModalLayout from "../layout/modal.layout";
 import useStore from "../store";
+import { IAccount } from "../types";
 
 export function Home() {
   const [paymentId, setPaymentId] = useState("");
   const [account, setAccount] = useState("");
-  const [allAccounts, setAllAccounts] = useState([]);
+  const [allAccounts, setAllAccounts] = useState<IAccount[]>([]);
   const [inflow, setInflow] = useState([]);
   const [outflow, setOutflow] = useState([]);
-  const [accountProfile, setAccountProfile] = useState<any>({});
-  const [userAccount, setUserAccount] = useState<any>([]);
-  const { setModal, setUser, currentModal } = useStore((state: any) => state);
+  const [accountProfile, setAccountProfile] = useState<IAccount | any>({});
+  const [userAccount, setUserAccount] = useState<IAccount[]>([]);
+  const { setModal, currentModal } = useStore((state: any) => state);
   const navigate = useNavigate();
 
   const user = JSON.parse(window.localStorage.getItem("user") as string);
 
   const getAccounts = async () => {
     const res = await getAllAccounts();
-    const filteredAccounts = res.filter(
-      (r: any) => r.profile._id !== user?._id
-    );
+    const filteredAccounts = res.filter((r) => r.profile._id !== user?._id);
 
     setAllAccounts(filteredAccounts);
   };
@@ -75,7 +74,7 @@ export function Home() {
     navigate("/login");
   };
 
-  const options = allAccounts.map((account: any) => {
+  const options = allAccounts.map((account) => {
     return {
       value: account.paymentID,
       label: `${account.profile?.name} ${account.paymentID}`,
@@ -89,7 +88,7 @@ export function Home() {
       if (res) {
         setInflow(res);
 
-        setModal(<ReceiveModal myAccount={account} transactions={inflow} />);
+        setModal(<ReceiveModal transactions={inflow} />);
       }
     } catch (error: any) {
       alert(error?.response?.data.message);
@@ -103,7 +102,7 @@ export function Home() {
       if (res) {
         setOutflow(res);
 
-        setModal(<SentModal myAccount={account} transactions={outflow} />);
+        setModal(<SentModal transactions={outflow} />);
       }
     } catch (error: any) {
       alert(error?.response?.data.message);
@@ -164,7 +163,7 @@ export function Home() {
                 className="text font-semibold mr-2"
                 placeholder="Select PaymentID"
                 options={options}
-                value={options.find((obj: any) => obj.value === paymentId)}
+                value={options.find((obj) => obj.value === paymentId)}
                 onChange={(e: any) => {
                   setPaymentId(e.value);
                 }}
@@ -219,7 +218,7 @@ export function Home() {
             </tr>
           </thead>
           <tbody>
-            {userAccount.map((user: any) => (
+            {userAccount.map((user) => (
               <tr
                 className={`${
                   account === user.paymentID ? "bg-gray-200" : ""

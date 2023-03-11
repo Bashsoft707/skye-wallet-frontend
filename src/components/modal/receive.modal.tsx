@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { CloseIcon } from "../icons.component";
 import useStore from "../../store";
+import { ITransaction } from "../../types";
 
-function ReceiveModal({
-  transactions,
-  myAccount,
-}: {
-  transactions: any;
-  myAccount: any;
-}) {
+function ReceiveModal({ transactions }: { transactions: ITransaction[] }) {
   const setModal = useStore((state: any) => state.setModal);
 
   return (
@@ -23,8 +18,8 @@ function ReceiveModal({
           </span>
         </div>
         <ul>
-          {transactions.map((transaction: any) => (
-            <li key={transaction.id}>{transaction.receiver}</li>
+          {transactions.map((transaction) => (
+            <li key={transaction._id}>{transaction.receiver}</li>
           ))}
         </ul>
       </div>

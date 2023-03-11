@@ -1,5 +1,6 @@
 import { baseUrl } from "../constant";
 import axios from "axios";
+import { IAccount } from "../types";
 
 export const generatePaymentId = async () => {
     const token = window.localStorage.getItem("token");
@@ -12,7 +13,7 @@ export const generatePaymentId = async () => {
     return res.data;
 }
 
-export const getAllAccounts = async () => {
+export const getAllAccounts = async (): Promise<IAccount[]> => {
     const token = window.localStorage.getItem("token");
     const res = await axios.get(`${baseUrl}/account`, {
         headers: {
@@ -23,7 +24,7 @@ export const getAllAccounts = async () => {
     return res.data;
 }
 
-export const getAccount = async (paymentId: string) => {
+export const getAccount = async (paymentId: string): Promise<IAccount[]> => {
     const token = window.localStorage.getItem("token");
     const res = await axios.get(`${baseUrl}/account/pay?paymentId=${paymentId}`, {
         headers: {
@@ -34,7 +35,7 @@ export const getAccount = async (paymentId: string) => {
     return res.data;
 }
 
-export const userAccounts = async () => {
+export const userAccounts = async (): Promise<IAccount[]> => {
     const token = window.localStorage.getItem("token");
     const res = await axios.get(`${baseUrl}/account/user`, {
         headers: {

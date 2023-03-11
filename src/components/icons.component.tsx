@@ -347,7 +347,7 @@ export function AttachmentIcon(
   );
 }
 
-export function WithdrawIcon(props: any) {
+export function WithdrawIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="25"
@@ -368,7 +368,7 @@ export function WithdrawIcon(props: any) {
   );
 }
 
-export function DepositIcon(props: any) {
+export function DepositIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="25"
@@ -389,7 +389,7 @@ export function DepositIcon(props: any) {
   );
 }
 
-export function OptionIcon(props: any) {
+export function OptionIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="39"
@@ -406,7 +406,7 @@ export function OptionIcon(props: any) {
   );
 }
 
-export function ReloadIcon(props: any) {
+export function ReloadIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="40"
@@ -434,7 +434,7 @@ export function ReloadIcon(props: any) {
   );
 }
 
-export function BitcoinIcon(props: any) {
+export function BitcoinIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="32"
@@ -465,7 +465,7 @@ export function BitcoinIcon(props: any) {
   );
 }
 
-export function USDTIcon(props: any) {
+export function USDTIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="32"
@@ -523,7 +523,7 @@ export function CopyIcon(
   );
 }
 
-export function CloseIcon(props: any) {
+export function CloseIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="32"
@@ -543,7 +543,7 @@ export function CloseIcon(props: any) {
   );
 }
 
-export function Hamburger(props: any) {
+export function Hamburger(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       width="32"
@@ -575,7 +575,7 @@ export function Hamburger(props: any) {
   );
 }
 
-export function Spinner(props: any) {
+export function Spinner(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       aria-hidden="true"
@@ -595,7 +595,7 @@ export function Spinner(props: any) {
     </svg>
   );
 }
-export function SelectIcon(props: any) {
+export function SelectIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   <svg
     width="13"
     height="14"

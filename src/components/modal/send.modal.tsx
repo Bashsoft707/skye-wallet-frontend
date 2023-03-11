@@ -3,13 +3,20 @@ import { CloseIcon } from "../icons.component";
 import Select from "react-select";
 import useStore from "../../store";
 import { sendFunds } from "../../api/transaction";
+import { IAccount } from "../../types";
 
-function SendModal({ accounts, myAccount }: { accounts: any; myAccount: any }) {
+function SendModal({
+  accounts,
+  myAccount,
+}: {
+  accounts: IAccount[];
+  myAccount: string;
+}) {
   const [paymentId, setPaymentId] = useState("");
   const [amount, setAmount] = useState(0);
   const setModal = useStore((state: any) => state.setModal);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -26,7 +33,7 @@ function SendModal({ accounts, myAccount }: { accounts: any; myAccount: any }) {
   };
 
   // dropdown select options
-  const options = accounts.map((account: any) => {
+  const options = accounts.map((account) => {
     return {
       value: account.paymentID,
       label: `${account.profile?.name} ${account.paymentID}`,
@@ -51,7 +58,7 @@ function SendModal({ accounts, myAccount }: { accounts: any; myAccount: any }) {
                 className="my-2 text font-semibold"
                 placeholder="Select PaymentID"
                 options={options}
-                value={options.find((obj: any) => obj.value === paymentId)}
+                value={options.find((obj) => obj.value === paymentId)}
                 onChange={(e: any) => {
                   setPaymentId(e.value);
                 }}

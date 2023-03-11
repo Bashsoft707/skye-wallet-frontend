@@ -43,8 +43,8 @@ export function Register() {
         alert("Sign up successful");
         return navigate("/login");
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error: any) {
+      alert(error?.response?.data.message);
     }
   };
 

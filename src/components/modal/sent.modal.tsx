@@ -1,14 +1,9 @@
 import React from "react";
 import { CloseIcon } from "../icons.component";
 import useStore from "../../store";
+import { ITransaction } from "../../types";
 
-function SentModal({
-  transactions,
-  myAccount,
-}: {
-  transactions: any;
-  myAccount: any;
-}) {
+function SentModal({ transactions }: { transactions: ITransaction[] }) {
   const setModal = useStore((state: any) => state.setModal);
 
   return (
@@ -23,8 +18,8 @@ function SentModal({
           </span>
         </div>
         <ul>
-          {transactions.map((transaction: any) => (
-            <li key={transaction.id}>{transaction.sender}</li>
+          {transactions.map((transaction) => (
+            <li key={transaction._id}>{transaction.sender}</li>
           ))}
         </ul>
       </div>
