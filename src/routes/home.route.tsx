@@ -107,6 +107,7 @@ export function Home() {
     try {
       await deleteAccount(id);
       alert("Account Deleted");
+      navigate(0);
     } catch (error: any) {
       alert(error?.response?.data.message);
     }

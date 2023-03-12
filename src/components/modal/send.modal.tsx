@@ -4,6 +4,7 @@ import Select from "react-select";
 import useStore from "../../store";
 import { sendFunds } from "../../api/transaction";
 import { IAccount } from "../../types";
+import { useNavigate } from "react-router-dom";
 
 function SendModal({
   accounts,
@@ -15,6 +16,7 @@ function SendModal({
   const [paymentId, setPaymentId] = useState("");
   const [amount, setAmount] = useState(0);
   const setModal = useStore((state: any) => state.setModal);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ function SendModal({
       });
 
       setModal(null);
+      navigate(0);
     } catch (error: any) {
       alert(error?.response?.data.message);
     }
