@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import {
+  deleteAccount,
   generatePaymentId,
   getAccount,
   getAllAccounts,
@@ -17,6 +18,7 @@ import { IAccount } from "../types";
 
 export function Home() {
   const [paymentId, setPaymentId] = useState("");
+  const [id, setId] = useState("");
   const [account, setAccount] = useState("");
   const [allAccounts, setAllAccounts] = useState<IAccount[]>([]);
   const [accountProfile, setAccountProfile] = useState<IAccount | any>({});
@@ -29,7 +31,7 @@ export function Home() {
   const getAccounts = async () => {
     const res = await getAllAccounts();
     const filteredAccounts = res.filter((r) => r.profile._id !== user?._id);
-      
+
     setAllAccounts(filteredAccounts);
   };
 
@@ -101,6 +103,15 @@ export function Home() {
     }
   };
 
+  const removeAccount = async () => {
+    try {
+      await deleteAccount(id);
+      alert("Account Deleted");
+    } catch (error: any) {
+      alert(error?.response?.data.message);
+    }
+  };
+
   return (
     <>
       {currentModal && <ModalLayout />}
@@ -109,7 +120,7 @@ export function Home() {
           <div>
             <button
               type="button"
-              className="border-none outline-none py-3 px-2 rounded text-blue bg-[transparent]"
+              className="border-none outline-none py-3 px-2 rounded text-[blue] bg-[transparent]"
               disabled={!account}
               onClick={() =>
                 setModal(
@@ -121,7 +132,7 @@ export function Home() {
             </button>
             <button
               type="button"
-              className="border-none outline-none py-3 px-2 rounded text-blue bg-[transparent]"
+              className="border-none outline-none py-3 px-2 rounded text-[blue] bg-[transparent]"
               disabled={!account}
               onClick={received}
             >
@@ -129,11 +140,19 @@ export function Home() {
             </button>
             <button
               type="button"
-              className="border-none outline-none py-3 px-2 rounded text-blue bg-[transparent]"
+              className="border-none outline-none py-3 px-2 rounded text-[blue] bg-[transparent]"
               disabled={!account}
               onClick={sent}
             >
               Outflow Transactions
+            </button>
+            <button
+              type="button"
+              className="border-none outline-none py-3 px-2 rounded text-[red] bg-[transparent]"
+              disabled={!account}
+              onClick={removeAccount}
+            >
+              Delete Account
             </button>
           </div>
           <button
@@ -216,7 +235,10 @@ export function Home() {
                   account === user.paymentID ? "bg-gray-200" : ""
                 } cursor-pointer`}
                 key={user._id}
-                onClick={() => setAccount(user.paymentID)}
+                onClick={() => {
+                  setAccount(user.paymentID);
+                  setId(user._id);
+                }}
               >
                 <td className="p-3 lg:w-auto w-full text-center lg:text-left">
                   {user.paymentID}
