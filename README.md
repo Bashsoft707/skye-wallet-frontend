@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+### `Live app`
+
+Runs the app in the production mode.\
+Open [https://skye-waalet.netlify.app/](https://skye-waalet.netlify.app/) to view it in the browser.
+
 In the project directory, you can run:
 
 ### `yarn start`
