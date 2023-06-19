@@ -16,7 +16,7 @@ function SendModal({
   const [paymentId, setPaymentId] = useState("");
   const [amount, setAmount] = useState(0);
   const setModal = useStore((state: any) => state.setModal);
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,7 +29,7 @@ function SendModal({
       });
 
       setModal(null);
-      navigate(0);
+      
     } catch (error: any) {
       alert(error?.response?.data.message);
     }

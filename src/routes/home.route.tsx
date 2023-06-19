@@ -200,7 +200,6 @@ export function Home() {
                 <h4>
                   Profile Phone Number: {accountProfile?.profile?.phoneNumber}
                 </h4>
-                <h4>Profile Balance: {accountProfile?.balance}</h4>
               </div>
             </div>
           )}
